@@ -103,7 +103,7 @@ Follow the security and troubleshooting steps in `docs/XQUARTZ.md`.
 
 ## Publishing
 
-Do not put the SDK payload in ordinary Git history. Keep Git small, upload compressed SDK payloads as release assets, and distribute the image through GHCR or another registry. See [docs/DISTRIBUTION.md](docs/DISTRIBUTION.md).
+Will upload compressed SDK payloads as release assets, and distribute the image through GHCR or another registry. See [docs/DISTRIBUTION.md](docs/DISTRIBUTION.md).
 
 ## License
 
