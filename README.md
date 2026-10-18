@@ -23,8 +23,6 @@ docker compose up -d dev
 docker compose exec dev qcc -V
 ```
 
-Replace `OWNER` after publishing the package. Public GHCR images support anonymous pulls.
-
 ## Build locally
 
 ```bash
