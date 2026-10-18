@@ -1,0 +1,3 @@
+[mcp_servers.bbndk]
+command = "docker"
+args = ["exec", "-i", "bbndk-dev", "python3", "/opt/bbndk-mcp/server.py"]

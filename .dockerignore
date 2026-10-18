@@ -1,0 +1,8 @@
+.git
+output
+projects
+*.zip
+*.tar
+*.tar.gz
+*.tar.zst
+sdk/*.tar*

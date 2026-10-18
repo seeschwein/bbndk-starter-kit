@@ -1,0 +1,8 @@
+name: bbndk-workspace
+title: BB10 NDK Workspace
+type: server
+image: REPLACE_WITH_REGISTRY/bbndk-starter-kit:latest
+description: Restricted BB10 source editing, compilation, and BAR packaging tools.
+command: [python3, /opt/bbndk-mcp/server.py]
+volumes:
+  - REPLACE_WITH_ABSOLUTE_PROJECTS_PATH:/workspace

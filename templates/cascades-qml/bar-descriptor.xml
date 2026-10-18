@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<qnx>
+  <id>com.example.cascadeshello</id>
+  <filename>cascadeshello</filename>
+  <name>Cascades Hello</name>
+  <versionNumber>1.0.0</versionNumber>
+  <description>Minimal Cascades/QML application</description>
+  <asset path="arm/o.le-v7-g/cascadeshello">cascadeshello</asset>
+  <asset path="assets">assets</asset>
+</qnx>

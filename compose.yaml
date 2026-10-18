@@ -1,0 +1,31 @@
+services:
+  dev:
+    image: ${BBNDK_IMAGE:-bbndk-starter-kit:local}
+    build:
+      context: .
+      platforms: [linux/amd64]
+    platform: linux/amd64
+    container_name: bbndk-dev
+    working_dir: /workspace
+    command: ["sleep", "infinity"]
+    init: true
+    stdin_open: true
+    tty: true
+    volumes:
+      - ${BBNDK_WORKSPACE:-./projects}:/workspace
+    security_opt: [no-new-privileges:true]
+    cap_drop: [ALL]
+
+  momentics:
+    profiles: [gui]
+    image: ${BBNDK_MOMENTICS_IMAGE:-novelprofessor/bbndk}
+    platform: linux/amd64
+    container_name: bbndk-momentics
+    environment:
+      DISPLAY: host.docker.internal:0
+    working_dir: /workspace
+    command: ["/bin/bash", "-lc", "/home/admin/bin/bbndk/qde"]
+    volumes:
+      - ${BBNDK_WORKSPACE:-./projects}:/workspace
+    extra_hosts:
+      - host.docker.internal:host-gateway

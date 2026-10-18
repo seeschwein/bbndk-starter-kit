@@ -1,0 +1,7 @@
+* text=auto eol=lf
+*.sh text eol=lf
+*.py text eol=lf
+*.bar binary
+*.png binary
+*.zip binary
+*.zst binary

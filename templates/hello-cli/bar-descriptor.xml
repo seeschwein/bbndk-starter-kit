@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<qnx>
+  <id>com.example.hellocli</id>
+  <filename>hellocli</filename>
+  <name>Hello CLI</name>
+  <versionNumber>1.0.0</versionNumber>
+  <description>Minimal native BlackBerry 10 application</description>
+  <asset path="hellocli">hellocli</asset>
+</qnx>
