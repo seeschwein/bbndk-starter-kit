@@ -9,7 +9,7 @@ brew install --cask xquartz
 open -a XQuartz
 ```
 
-In XQuartz Settings > Security, enable **Allow connections from network clients**, quit, and reopen XQuartz. Authorize local clients only:
+In XQuartz Settings > Security, enable **Allow connections from network clients**, quit, and reopen XQuartz. Authorise local clients only:
 
 ```bash
 xhost +localhost
