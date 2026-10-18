@@ -107,8 +107,9 @@ Inside the container:
 qcc -V
 blackberry-nativepackager -version
 ```
-![alt text](/docs/qcc.png)
-![alt text](/docs/packager.png)
+qcc.                       |  bbpkg
+:-------------------------:|:-------------------------:
+![alt text](/docs/qcc.png) | ![alt text](/docs/packager.png)
 
 Java 21 prints SecurityManager deprecation warnings. Just ignore, they are expected; compatibility flags allow the 2014 packager to run.
 
