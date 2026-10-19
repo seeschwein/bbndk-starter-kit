@@ -19,10 +19,10 @@ COPY tools/bbndk /usr/local/bin/bbndk
 RUN useradd -ms /bin/bash dev \
  && mkdir -p /workspace \
  && chown -R dev:dev /workspace /opt/bbndk /opt/bbndk-mcp \
- && chmod +x /opt/bbndk-mcp/server.py
+ && chmod +x /opt/bbndk-mcp/server.py \
  && chown -R dev:dev /opt/bbndk-tools \
  && chmod +x /usr/local/bin/bbndk /opt/bbndk-tools/scripts/*.sh
- 
+
 USER dev
 WORKDIR /workspace
 ENV BBNDK_TOOLS_ROOT=/opt/bbndk-tools
