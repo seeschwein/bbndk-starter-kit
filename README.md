@@ -21,7 +21,7 @@ The legacy BBNDK host tools are 32-bit Intel Linux executables. The image is the
 Install and start Docker Desktop, then run:
 
 ```bash
-git https://github.com/seeschwein/bbndk-starter-kit
+git clone https://github.com/seeschwein/bbndk-starter-kit
 cd bbndk-starter-kit
 mkdir -p projects
 export BBNDK_IMAGE=ghcr.io/seeschwein/bbndk-starter-kit:latest
@@ -123,12 +123,35 @@ docker compose exec -w /workspace/myapp dev make inspect
 
 The BAR appears under `projects/myapp` on the host.
 
+## Unified CLI
+
+After rebuilding the image, you can use the wrapper command instead of repeating long `docker compose` calls.
+
+```bash
+./tools/bbndk up
+./tools/bbndk doctor
+./tools/bbndk new cli myapp com.example.myapp
+./tools/bbndk new cascades mygui com.example.mygui
+./tools/bbndk new cascades-cmake mygui2 com.example.mygui2
+./tools/bbndk check /workspace/myapp
+./tools/bbndk build /workspace/myapp
+./tools/bbndk shell
+```
+
 ## Create a Cascades project
 
 ```bash
 ./scripts/new-project.sh cascades mycascades com.example.mycascades
 docker compose exec -w /workspace/mycascades dev make
 ```
+
+## Cascades CMake project
+
+```bash
+./tools/bbndk new cascades-cmake mycascades com.example.mycascades
+./tools/bbndk build /workspace/mycascades
+```
+
 
 Use VSCodium for source editing and the optional Momentics image for historical BlackBerry wizards and QML exploration. See [docs/XQUARTZ.md](docs/XQUARTZ.md).
 

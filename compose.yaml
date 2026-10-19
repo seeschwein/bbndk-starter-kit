@@ -6,6 +6,8 @@ services:
       platforms: [linux/amd64]
     platform: linux/amd64
     container_name: bbndk-dev
+    environment:
+      BBNDK_TOOLS_ROOT: /opt/bbndk-tools
     working_dir: /workspace
     command: ["sleep", "infinity"]
     init: true

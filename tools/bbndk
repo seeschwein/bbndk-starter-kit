@@ -1,0 +1,83 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
+COMPOSE="${COMPOSE:-docker compose}"
+SERVICE="${BBNDK_SERVICE:-dev}"
+CONTAINER="${BBNDK_CONTAINER:-bbndk-dev}"
+TOOLS_ROOT="${BBNDK_TOOLS_ROOT:-/opt/bbndk-tools}"
+
+usage() {
+  cat <<'USAGE'
+Usage:
+  tools/bbndk up
+  tools/bbndk shell
+  tools/bbndk doctor
+  tools/bbndk check [PROJECT_PATH]
+  tools/bbndk build [PROJECT_PATH]
+  tools/bbndk exec [ARGS...]
+  tools/bbndk new cli NAME APP_ID
+  tools/bbndk new cascades NAME APP_ID
+  tools/bbndk new cascades-cmake NAME APP_ID
+
+Examples:
+  tools/bbndk up
+  tools/bbndk doctor
+  tools/bbndk new cli myapp com.example.myapp
+  tools/bbndk build /workspace/myapp
+USAGE
+}
+
+require_container() {
+  if ! docker ps --format '{{.Names}}' | grep -qx "$CONTAINER"; then
+    echo "Container $CONTAINER is not running. Start it with: tools/bbndk up" >&2
+    exit 1
+  fi
+}
+
+cmd="${1:-}"
+case "$cmd" in
+  up)
+    shift
+    $COMPOSE up -d "$SERVICE"
+    ;;
+  shell)
+    shift
+    require_container
+    docker exec -it "$CONTAINER" bash
+    ;;
+  exec)
+    shift
+    require_container
+    docker exec -it "$CONTAINER" "$@"
+    ;;
+  doctor)
+    shift
+    require_container
+    docker exec -i "$CONTAINER" bash "$TOOLS_ROOT/scripts/doctor.sh"
+    ;;
+  check)
+    shift
+    project="${1:-/workspace}"
+    require_container
+    docker exec -i "$CONTAINER" bash "$TOOLS_ROOT/scripts/check-project.sh" "$project"
+    ;;
+  build)
+    shift
+    project="${1:-/workspace}"
+    require_container
+    docker exec -i "$CONTAINER" bash -lc "cd '$project' && if [[ -f Makefile ]]; then make; else echo 'No Makefile found in $project' >&2; exit 1; fi"
+    ;;
+  new)
+    shift
+    bash "$ROOT/scripts/new-project.sh" "$@"
+    ;;
+  ""|-h|--help|help)
+    usage
+    ;;
+  *)
+    echo "Unknown command: $cmd" >&2
+    usage >&2
+    exit 2
+    ;;
+esac
