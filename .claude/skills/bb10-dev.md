@@ -541,6 +541,20 @@ QNX_ARCH=x86 bb10-c++ -o myapp_x86 source.cpp
 
 ---
 
+## Qt 4.8.6 Workarounds & Build Practices
+
+Reference the **`bb10-qt4-practices.md`** file for the following key Qt 4‑specific fixes and compiler flags:
+
+1. **`QStringLiteral` missing** – use `QLatin1String("…")` or `QString(QLatin1String("…")).arg(...)`.
+2. **`UserAgentHeader` not available** – set raw headers: `setRawHeader(QByteArray("User-Agent"), QByteArray("…"))`.
+3. **Protected `finished()` signal** – use the string‑based `connect(reply, SIGNAL(finished()), this, SLOT(onReplyFinished()))`.
+4. **`QImage` forward declaration insufficient** – include `<QtGui/QImage>` and link `QtGui`.
+5. **SQLite support** – add QtSql and link `QtSql`.
+6. **Thread safety for QMap** – guard with `QMutex` and `QMutexLocker`.
+7. **Compiler flags** – override default `bb10-c++` to use `-std=gnu++11 -fexceptions -frtti -fno-use-cxa-atexit`.
+- **TLS 1.0 workaround** applied in XIAZY Dockerfile for `blackberry-deploy`
+These patterns are already incorporated into the *Compas* CMake project but form a good checklist for anyone else starting a new BB10/Cascades app.
+
 ## References
 
 - [XIAZY blackberry10-toolchain](https://github.com/XIAZY/blackberry10-toolchain) — Modern Clang toolchain
