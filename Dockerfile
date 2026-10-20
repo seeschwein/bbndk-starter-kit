@@ -29,4 +29,7 @@ ENV QNX_TARGET=/opt/bbndk/target_10_3_1_995/qnx6
 ENV PATH="${QNX_HOST}/usr/bin:${PATH}"
 ENV JAVA_HOME=/usr/lib/jvm/java-21-openjdk-amd64
 ENV JDK_JAVA_OPTIONS="-Djava.security.manager=allow --add-exports=java.xml/com.sun.org.apache.xerces.internal.parsers=ALL-UNNAMED"
+# TLS 1.0 workaround for BB10 deployment (legacy ciphers)
+RUN echo "jdk.tls.disabledAlgorithms=" >> ${JAVA_HOME}/conf/security/java.security \
+ && echo "jdk.zip.disableZip64 = false" >> ${JAVA_HOME}/conf/security/java.security
 CMD ["/bin/bash"]

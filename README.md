@@ -113,6 +113,18 @@ qcc.                       |  bbpkg
 
 Java 21 prints SecurityManager deprecation warnings. Just ignore, they are expected; compatibility flags allow the 2014 packager to run.
 
+### TLS 1.0 Workaround for BB10 Deployment
+
+BlackBerry 10 devices only support TLS 1.0 with legacy ciphers for the `blackberry-deploy` protocol. The image includes a Java security policy fix:
+
+```dockerfile
+ENV JDK_JAVA_OPTIONS="-Djava.security.manager=allow --add-exports=java.xml/com.sun.org.apache.xerces.internal.parsers=ALL-UNNAMED"
+RUN echo "jdk.tls.disabledAlgorithms=" >> ${JAVA_HOME}/conf/security/java.security \
+ && echo "jdk.zip.disableZip64 = false" >> ${JAVA_HOME}/conf/security/java.security
+```
+
+This allows `blackberry-deploy` to connect to a non-rooted device in Development Mode without host-side Java modifications.
+
 ## Create a CLI project
 
 ```bash
