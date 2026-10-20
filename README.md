@@ -54,7 +54,7 @@ Install Docker Desktop, select the WSL 2 backend, and make sure Docker is using 
 git clone REPOSITORY_URL
 Set-Location bbndk-starter-kit
 New-Item -ItemType Directory -Force projects | Out-Null
-$env:BBNDK_IMAGE = "ghcr.io/OWNER/bbndk-starter-kit:latest"
+$env:BBNDK_IMAGE = "ghcr.io/seeschwein/bbndk-starter-kit:latest"
 $env:BBNDK_WORKSPACE = "${PWD}\projects"
 docker pull $env:BBNDK_IMAGE
 docker compose up -d --no-build dev
