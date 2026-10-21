@@ -1,16 +1,1 @@
-.DS_Store
-projects/*
-!projects/.gitkeep
-output/
-*.bar
-*.o
-*.so
-*.log
-build/
-sdk/host_10_3_1_12_linux_x86/
-sdk/target_10_3_1_995_qnx6/
-sdk/target_10_3_1_995_target-override/
-sdk/bbndk-env_10_3_1_995.sh
-sdk/*.tar*
-sdk/*.sha256
-.env
+assets/libs/
